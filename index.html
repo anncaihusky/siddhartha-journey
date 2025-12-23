@@ -1,4 +1,4 @@
-OCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -379,6 +379,8 @@ OCTYPE html>
             const [isPlaying, setIsPlaying] = useState(false);
             const audioRef = useRef(null);
 
+            // Removed automatic play useEffect to respect "No Autoplay" request.
+
             const togglePlay = async () => {
                 if (audioRef.current) {
                     if (isPlaying) {
@@ -402,25 +404,27 @@ OCTYPE html>
                     <audio
                         ref={audioRef}
                         loop
+                        // Removed autoPlay attribute
                         src="https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3"
                         preload="auto"
                     />
                     <button
                         onClick={togglePlay}
-                        className="group relative flex items-center justify-center w-12 h-12 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 shadow-lg cursor-pointer mix-blend-difference"
+                        // Updated style: White bg, black text/icon, no mix-blend-difference
+                        className="group relative flex items-center justify-center w-12 h-12 bg-white rounded-full border border-gray-200 text-black hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer"
                         title={isPlaying ? "Pause Music" : "Play Meditation Music"}
                     >
                         {isPlaying ? (
                             <div className="relative flex items-center justify-center">
-                                <Volume2 size={20} className="text-white opacity-90" />
+                                <Volume2 size={20} className="text-black opacity-90" />
                                 <div className="absolute -top-1 -right-2 flex gap-0.5 items-end h-3">
-                                    <div className="w-0.5 bg-amber-300 animate-eq-1" />
-                                    <div className="w-0.5 bg-amber-300 animate-eq-2" />
-                                    <div className="w-0.5 bg-amber-300 animate-eq-3" />
+                                    <div className="w-0.5 bg-black animate-eq-1" />
+                                    <div className="w-0.5 bg-black animate-eq-2" />
+                                    <div className="w-0.5 bg-black animate-eq-3" />
                                 </div>
                             </div>
                         ) : (
-                            <VolumeX size={20} className="text-white opacity-60" />
+                            <VolumeX size={20} className="text-black opacity-60" />
                         )}
                     </button>
                 </div>
@@ -431,7 +435,8 @@ OCTYPE html>
             return (
                 <button
                     onClick={() => setLang(prev => prev === 'en' ? 'zh' : 'en')}
-                    className="fixed top-6 right-20 z-50 group flex items-center justify-center h-12 px-4 bg-white/10 backdrop-blur-md rounded-full border border-white/20 text-white hover:bg-white/20 transition-all duration-300 shadow-lg cursor-pointer mix-blend-difference font-serif"
+                    // Keep updated style: white background, black text
+                    className="fixed top-6 right-20 z-50 group flex items-center justify-center h-12 px-4 bg-white rounded-full text-black hover:bg-gray-100 transition-all duration-300 shadow-lg cursor-pointer font-serif border border-gray-200"
                     title="Switch Language"
                 >
                     <Globe size={18} className="mr-2 opacity-80" />
@@ -798,7 +803,7 @@ OCTYPE html>
             const [scrollY, setScrollY] = useState(0);
             const [activeStage, setActiveStage] = useState(0);
             const [journeyId, setJourneyId] = useState(0);
-            const [lang, setLang] = useState('en');
+            const [lang, setLang] = useState('zh'); // Changed default to 'zh' (Chinese)
 
             const currentContent = CONTENT[lang];
 
@@ -951,4 +956,3 @@ OCTYPE html>
     </script>
 </body>
 </html>
-
